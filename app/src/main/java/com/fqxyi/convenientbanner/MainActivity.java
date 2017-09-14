@@ -60,8 +60,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startAutoTurn(View view) {
-        banner.setPointViewVisible(true);
         banner.startTurning(2000);
+    }
+
+    public void pauseAutoTurn(View view) {
+        banner.pauseTurning();
     }
 
     public void stopAutoTurn(View view) {

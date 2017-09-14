@@ -318,8 +318,14 @@ public class ConvenientBanner<T> extends LinearLayout {
         return this;
     }
 
+    public void pauseTurning() {
+        autoTurning = false;
+        handler.removeMessages(MSG_TURNING);
+    }
+
     public void stopTurning() {
         autoTurning = false;
+        canTurn = false;
         handler.removeMessages(MSG_TURNING);
     }
 
@@ -379,9 +385,9 @@ public class ConvenientBanner<T> extends LinearLayout {
                 startTurning(autoTurningTime);
             }
         } else if (action == MotionEvent.ACTION_DOWN) {
-            // 停止翻页
+            // 暂停翻页
             if (canTurn) {
-                stopTurning();
+                pauseTurning();
             }
         }
         return super.dispatchTouchEvent(ev);
