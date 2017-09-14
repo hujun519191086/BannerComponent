@@ -2,8 +2,8 @@ package com.fqxyi.convenientbanner;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
-import com.facebook.drawee.drawable.ScalingUtils;
 import com.fqxyi.library.ConvenientBanner;
 import com.fqxyi.library.holder.CBViewHolderCreator;
 
@@ -13,9 +13,11 @@ public class MainActivity extends AppCompatActivity {
 
     private ConvenientBanner convenientBanner;
     private String[] images = {
-            "http://pic62.nipic.com/file/20150319/12632424_132215178296_2.jpg",
-            "http://pic55.nipic.com/file/20141208/19462408_171130083000_2.jpg",
-            "http://pic.58pic.com/58pic/16/66/85/47v58PICMYf_1024.jpg"
+            "http://img2.3lian.com/2014/f4/25/d/85.jpg",
+            "http://img2.3lian.com/2014/f4/25/d/82.jpg",
+            "http://img2.3lian.com/2014/f4/25/d/88.jpg",
+            "http://img2.3lian.com/2014/f4/25/d/90.jpg",
+            "http://img2.3lian.com/2014/f4/25/d/89.jpg"
     };
 
     @Override
@@ -24,18 +26,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         convenientBanner = (ConvenientBanner) findViewById(R.id.convenient_banner);
+    }
 
-        // 显示图片
-        final ImageHolderView imageHolderView = new ImageHolderView();
-        imageHolderView.setScaleType(ScalingUtils.ScaleType.FIT_XY);
+    public void simple(View view) {
         convenientBanner.setPages(new CBViewHolderCreator() {
             @Override
             public Object createHolder() {
-                return imageHolderView;
+                return new ImageHolderView();
             }
-        }, null);
-        convenientBanner.setData(Arrays.asList(images));
-
+        }, Arrays.asList(images));
     }
 
 }

@@ -3,11 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.fqxyi.convenientbanner.MainActivity">
 
-    <com.fqxyi.library.ConvenientBanner
-        android:id="@+id/convenient_banner"
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="点击按钮展示"
+            android:textColor="#33000000"
+            android:textSize="32sp"/>
+
+        <com.fqxyi.library.ConvenientBanner
+            android:id="@+id/convenient_banner"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
+    </RelativeLayout>
+
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:onClick="simple"
+        android:text="简单使用"
+        android:textColor="#000000"
+        android:textSize="16sp"/>
 
 </LinearLayout>
