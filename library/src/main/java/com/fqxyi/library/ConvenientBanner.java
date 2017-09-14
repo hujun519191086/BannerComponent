@@ -40,7 +40,7 @@ public class ConvenientBanner<T> extends LinearLayout {
     private CBPageChangeListener pageChangeListener;
     private ViewPager.OnPageChangeListener onPageChangeListener;
     @SuppressWarnings("rawtypes")
-    private CBPageAdapter pageAdapter;
+    private CBPageAdapter<T> pageAdapter;
     private CBLoopViewPager viewPager;
     private ViewPagerScroller scroller;
     private ViewGroup loPageTurningPoint;
@@ -142,14 +142,28 @@ public class ConvenientBanner<T> extends LinearLayout {
      * 设置数据
      *
      * @param holderCreator
+     * @return
+     */
+    public ConvenientBanner setPages(CBViewHolderCreator holderCreator) {
+        setPages(holderCreator, null);
+        return this;
+    }
+
+    /**
+     * 设置数据
+     *
+     * @param holderCreator
      * @param data
      * @return
      */
     public ConvenientBanner setPages(CBViewHolderCreator holderCreator, List<T> data) {
         this.data = data;
-        pageAdapter = new CBPageAdapter(holderCreator, this.data);
+        pageAdapter = new CBPageAdapter<>(holderCreator, data);
         pageAdapter.setRightIndicator(rightIndicator);
         viewPager.setAdapter(pageAdapter, canLoop);
+        if (page_indicatorId != null) {
+            setPageIndicator(page_indicatorId);
+        }
         return this;
     }
 
@@ -166,6 +180,9 @@ public class ConvenientBanner<T> extends LinearLayout {
         }
         pageAdapter.setData(data);
         pageAdapter.notifyDataSetChanged();
+        if (page_indicatorId != null) {
+            setPageIndicator(page_indicatorId);
+        }
         return this;
     }
 
@@ -207,6 +224,7 @@ public class ConvenientBanner<T> extends LinearLayout {
             return this;
         }
         mPointViews.clear();
+        this.page_indicatorId = null;
         TextView textView = (TextView) LayoutInflater.from(getContext()).inflate(layoutId, null);
         loPageTurningPoint.addView(textView);
         pageChangeListener = new CBPageChangeListener(textView, data.size());
@@ -305,7 +323,7 @@ public class ConvenientBanner<T> extends LinearLayout {
         handler.removeMessages(MSG_TURNING);
     }
 
-    public void destoryHandler() {
+    public void destroy() {
         if (null != handler) {
             handler.removeCallbacksAndMessages(null);
         }

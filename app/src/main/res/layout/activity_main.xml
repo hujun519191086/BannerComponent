@@ -6,33 +6,10 @@
     android:orientation="vertical"
     tools:context="com.fqxyi.convenientbanner.MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/banner_root"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="点击按钮展示"
-            android:textColor="#33000000"
-            android:textSize="32sp"/>
-
-        <com.fqxyi.library.ConvenientBanner
-            android:id="@+id/banner"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"/>
-
-    </RelativeLayout>
-
-    <Button
+    <com.fqxyi.library.ConvenientBanner
+        android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="simple"
-        android:text="简单使用"
-        android:textColor="#000000"
-        android:textSize="16sp"/>
+        android:layout_height="200dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,28 +19,61 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="pointer1"
-            android:text="指示点1"
+            android:onClick="pointerType1Left"
+            android:text="指示点\n类型1靠左"
             android:textColor="#000000"
-            android:textSize="16sp"/>
+            android:textSize="12sp"/>
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="pointer2"
-            android:text="指示点2"
+            android:onClick="pointerType2Center"
+            android:text="指示点\n类型2居中"
             android:textColor="#000000"
-            android:textSize="16sp"/>
+            android:textSize="12sp"/>
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="pointer3"
-            android:text="指示点3"
+            android:onClick="pointerType1Right"
+            android:text="指示点\n类型1靠右"
             android:textColor="#000000"
-            android:textSize="16sp"/>
+            android:textSize="12sp"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="pointerHide"
+            android:text="指示点\n隐藏"
+            android:textColor="#000000"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="startAutoTurn"
+            android:text="开始自动轮播"
+            android:textColor="#000000"
+            android:textSize="12sp"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="stopAutoTurn"
+            android:text="停止自动轮播"
+            android:textColor="#000000"
+            android:textSize="12sp"/>
 
     </LinearLayout>
 

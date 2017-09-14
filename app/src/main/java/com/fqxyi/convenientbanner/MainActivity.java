@@ -27,10 +27,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         banner = (ConvenientBanner) findViewById(R.id.banner);
-    }
-
-    public void simple(View view) {
-        banner.setPointViewVisible(false);
         banner.setPages(new CBViewHolderCreator() {
             @Override
             public Object createHolder() {
@@ -39,39 +35,42 @@ public class MainActivity extends AppCompatActivity {
         }, Arrays.asList(images));
     }
 
-    public void pointer1(View view) {
+    public void pointerType1Left(View view) {
         banner.setPointViewVisible(true);
         banner.setPageIndicator();
-        banner.setPages(new CBViewHolderCreator() {
-            @Override
-            public Object createHolder() {
-                return new ImageHolderView();
-            }
-        }, Arrays.asList(images));
+        banner.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_LEFT);
     }
 
-    public void pointer2(View view) {
+    public void pointerType2Center(View view) {
         banner.setPointViewVisible(true);
         banner.setPageIndicator(new int[]{
                 R.drawable.banner_point_normal,
                 R.drawable.banner_point_select});
-        banner.setPages(new CBViewHolderCreator() {
-            @Override
-            public Object createHolder() {
-                return new ImageHolderView();
-            }
-        }, Arrays.asList(images));
+        banner.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
     }
 
-    public void pointer3(View view) {
+    public void pointerType1Right(View view) {
         banner.setPointViewVisible(true);
         banner.setPageIndicator();
-        banner.setPages(new CBViewHolderCreator() {
-            @Override
-            public Object createHolder() {
-                return new ImageHolderView();
-            }
-        }, Arrays.asList(images));
+        banner.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
     }
 
+    public void pointerHide(View view) {
+        banner.setPointViewVisible(false);
+    }
+
+    public void startAutoTurn(View view) {
+        banner.setPointViewVisible(true);
+        banner.startTurning(2000);
+    }
+
+    public void stopAutoTurn(View view) {
+        banner.stopTurning();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        banner.destroy();
+    }
 }
