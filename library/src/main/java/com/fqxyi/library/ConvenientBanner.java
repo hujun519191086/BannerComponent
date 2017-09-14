@@ -360,17 +360,15 @@ public class ConvenientBanner<T> extends LinearLayout {
         }
     }
 
-    public boolean isManualPageable() {
+    public boolean isCanScroll() {
         return viewPager.isCanScroll();
     }
 
     /**
      * 设置可以滚动
-     *
-     * @param manualPageable
      */
-    public void setManualPageable(boolean manualPageable) {
-        viewPager.setCanScroll(manualPageable);
+    public void setCanScroll(boolean isCanScroll) {
+        viewPager.setCanScroll(isCanScroll);
     }
 
     //触碰控件的时候，翻页应该停止，离开的时候如果之前是开启了翻页的话则重新启动翻页
