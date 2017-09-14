@@ -150,10 +150,6 @@ public class ConvenientBanner<T> extends LinearLayout {
         pageAdapter = new CBPageAdapter(holderCreator, this.data);
         pageAdapter.setRightIndicator(rightIndicator);
         viewPager.setAdapter(pageAdapter, canLoop);
-
-        if (page_indicatorId != null) {
-            setPageIndicator(page_indicatorId);
-        }
         return this;
     }
 
@@ -190,9 +186,6 @@ public class ConvenientBanner<T> extends LinearLayout {
      */
     public void notifyDataSetChanged() {
         viewPager.getAdapter().notifyDataSetChanged();
-        if (page_indicatorId != null) {
-            setPageIndicator(page_indicatorId);
-        }
     }
 
     /**
@@ -213,6 +206,7 @@ public class ConvenientBanner<T> extends LinearLayout {
         if (data == null) {
             return this;
         }
+        mPointViews.clear();
         TextView textView = (TextView) LayoutInflater.from(getContext()).inflate(layoutId, null);
         loPageTurningPoint.addView(textView);
         pageChangeListener = new CBPageChangeListener(textView, data.size());

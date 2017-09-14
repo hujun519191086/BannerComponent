@@ -11,7 +11,8 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ConvenientBanner convenientBanner;
+    private ConvenientBanner banner;
+
     private String[] images = {
             "http://img2.3lian.com/2014/f4/25/d/85.jpg",
             "http://img2.3lian.com/2014/f4/25/d/82.jpg",
@@ -25,11 +26,47 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        convenientBanner = (ConvenientBanner) findViewById(R.id.convenient_banner);
+        banner = (ConvenientBanner) findViewById(R.id.banner);
     }
 
     public void simple(View view) {
-        convenientBanner.setPages(new CBViewHolderCreator() {
+        banner.setPointViewVisible(false);
+        banner.setPages(new CBViewHolderCreator() {
+            @Override
+            public Object createHolder() {
+                return new ImageHolderView();
+            }
+        }, Arrays.asList(images));
+    }
+
+    public void pointer1(View view) {
+        banner.setPointViewVisible(true);
+        banner.setPageIndicator();
+        banner.setPages(new CBViewHolderCreator() {
+            @Override
+            public Object createHolder() {
+                return new ImageHolderView();
+            }
+        }, Arrays.asList(images));
+    }
+
+    public void pointer2(View view) {
+        banner.setPointViewVisible(true);
+        banner.setPageIndicator(new int[]{
+                R.drawable.banner_point_normal,
+                R.drawable.banner_point_select});
+        banner.setPages(new CBViewHolderCreator() {
+            @Override
+            public Object createHolder() {
+                return new ImageHolderView();
+            }
+        }, Arrays.asList(images));
+    }
+
+    public void pointer3(View view) {
+        banner.setPointViewVisible(true);
+        banner.setPageIndicator();
+        banner.setPages(new CBViewHolderCreator() {
             @Override
             public Object createHolder() {
                 return new ImageHolderView();

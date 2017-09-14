@@ -22,6 +22,7 @@ public class CBPageChangeListener implements ViewPager.OnPageChangeListener {
     public CBPageChangeListener(TextView textView, int size) {
         this.textView = textView;
         this.size = size;
+        this.pointViews = null;
     }
 
     public CBPageChangeListener(ArrayList<ImageView> pointViews, int page_indicatorId[]) {
