@@ -31,7 +31,7 @@ public class TurnBanner<T> extends LinearLayout {
 
     // layout
     private BannerViewPager bannerViewPager;
-    private ViewGroup bannerPointerContainer;
+    private ViewGroup pointerContainer;
     // attr
     private long turnTime; // 翻页时间
     private boolean canTurn = false; // 能否手动触发翻页
@@ -88,7 +88,7 @@ public class TurnBanner<T> extends LinearLayout {
 
         View view = LayoutInflater.from(context).inflate(R.layout.view_banner, this, true);
         bannerViewPager = (BannerViewPager) view.findViewById(R.id.banner_view_pager);
-        bannerPointerContainer = (ViewGroup) view.findViewById(R.id.banner_point_container);
+        pointerContainer = (ViewGroup) view.findViewById(R.id.banner_point_container);
         // 初始化ViewPager的滑动速度
         try {
             Field mScroller = ViewPager.class.getDeclaredField("mScroller");
@@ -249,7 +249,7 @@ public class TurnBanner<T> extends LinearLayout {
     public TurnBanner setPageIndicator(int[] pointImgIds) {
         if (null == data) return this;
         // clear view
-        bannerPointerContainer.removeAllViews();
+        pointerContainer.removeAllViews();
         // clear data
         pointViews.clear();
         // get view
@@ -263,7 +263,7 @@ public class TurnBanner<T> extends LinearLayout {
                 pointView.setImageResource(pointImgIds[0]);
             }
             pointViews.add(pointView);
-            bannerPointerContainer.addView(pointView);
+            pointerContainer.addView(pointView);
         }
         pageChangeListener = new PageChangeListener(pointViews, pointImgIds);
         bannerViewPager.setOnPageChangeListener(pageChangeListener);
@@ -276,7 +276,7 @@ public class TurnBanner<T> extends LinearLayout {
      * 设置底部指示器是否可见
      */
     public TurnBanner setPointViewVisible(boolean visible) {
-        bannerPointerContainer.setVisibility(visible ? View.VISIBLE : View.GONE);
+        pointerContainer.setVisibility(visible ? View.VISIBLE : View.GONE);
         return this;
     }
 
@@ -289,11 +289,11 @@ public class TurnBanner<T> extends LinearLayout {
      *              居右 （RelativeLayout.ALIGN_PARENT_RIGHT）
      */
     public TurnBanner setPageIndicatorAlign(PageIndicatorAlign align) {
-        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) bannerPointerContainer.getLayoutParams();
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) pointerContainer.getLayoutParams();
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, align == PageIndicatorAlign.ALIGN_PARENT_LEFT ? RelativeLayout.TRUE : 0);
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, align == PageIndicatorAlign.ALIGN_PARENT_RIGHT ? RelativeLayout.TRUE : 0);
         layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, align == PageIndicatorAlign.CENTER_HORIZONTAL ? RelativeLayout.TRUE : 0);
-        bannerPointerContainer.setLayoutParams(layoutParams);
+        pointerContainer.setLayoutParams(layoutParams);
         return this;
     }
 
