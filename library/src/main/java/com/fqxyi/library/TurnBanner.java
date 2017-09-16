@@ -86,9 +86,9 @@ public class TurnBanner<T> extends LinearLayout {
             typedArray.recycle();
         }
 
-        View hView = LayoutInflater.from(context).inflate(R.layout.view_banner, this, true);
-        bannerViewPager = (BannerViewPager) hView.findViewById(R.id.banner_view_pager);
-        bannerPointerContainer = (ViewGroup) hView.findViewById(R.id.banner_point_container);
+        View view = LayoutInflater.from(context).inflate(R.layout.view_banner, this, true);
+        bannerViewPager = (BannerViewPager) view.findViewById(R.id.banner_view_pager);
+        bannerPointerContainer = (ViewGroup) view.findViewById(R.id.banner_point_container);
         // 初始化ViewPager的滑动速度
         try {
             Field mScroller = ViewPager.class.getDeclaredField("mScroller");
