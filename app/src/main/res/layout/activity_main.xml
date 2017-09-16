@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="com.fqxyi.convenientbanner.MainActivity">
 
-    <com.fqxyi.library.ConvenientBanner
+    <com.fqxyi.library.TurnBanner
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="200dp"/>

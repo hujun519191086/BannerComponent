@@ -1,6 +1,6 @@
 package com.fqxyi.library.holder;
 
-public interface CBViewHolderCreator<Holder> {
+public interface HolderCreator<Holder> {
 
     Holder createHolder();
 

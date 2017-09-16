@@ -1,4 +1,4 @@
-package com.fqxyi.library.util;
+package com.fqxyi.convenientbanner;
 
 import android.content.Context;
 

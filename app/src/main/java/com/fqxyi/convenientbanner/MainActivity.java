@@ -5,14 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.fqxyi.library.ConvenientBanner;
-import com.fqxyi.library.holder.CBViewHolderCreator;
+import com.fqxyi.library.TurnBanner;
+import com.fqxyi.library.holder.HolderCreator;
 
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ConvenientBanner banner;
+    private TurnBanner turnBanner;
 
     private Button loopBtn;
     private Button scrollBtn;
@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        banner = (ConvenientBanner) findViewById(R.id.banner);
-        banner.setPages(new CBViewHolderCreator() {
+        turnBanner = (TurnBanner) findViewById(R.id.banner);
+        turnBanner.setPages(new HolderCreator() {
             @Override
             public Object createHolder() {
                 return new ImageHolderView();
@@ -48,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
         loopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (banner.isCanLoop()) {
-                    banner.setCanLoop(false);
+                if (turnBanner.isCanLoop()) {
+                    turnBanner.setCanLoop(false);
                     loopBtn.setText("开启无限循环");
                 } else {
-                    banner.setCanLoop(true);
+                    turnBanner.setCanLoop(true);
                     loopBtn.setText("关闭无限循环");
                 }
             }
@@ -60,11 +60,11 @@ public class MainActivity extends AppCompatActivity {
         scrollBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (banner.isCanScroll()) {
-                    banner.setCanScroll(false);
+                if (turnBanner.isCanScroll()) {
+                    turnBanner.setCanScroll(false);
                     scrollBtn.setText("开启滚动");
                 } else {
-                    banner.setCanScroll(true);
+                    turnBanner.setCanScroll(true);
                     scrollBtn.setText("关闭滚动");
                 }
             }
@@ -72,44 +72,48 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pointerType1Left(View view) {
-        banner.setPointViewVisible(true);
-        banner.setPageIndicator();
-        banner.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_LEFT);
+        turnBanner.setPointViewVisible(true);
+        turnBanner.setPageIndicator(new int[]{
+                R.drawable.banner_point_normal,
+                R.drawable.banner_point_select});
+        turnBanner.setPageIndicatorAlign(TurnBanner.PageIndicatorAlign.ALIGN_PARENT_LEFT);
     }
 
     public void pointerType2Center(View view) {
-        banner.setPointViewVisible(true);
-        banner.setPageIndicator(new int[]{
+        turnBanner.setPointViewVisible(true);
+        turnBanner.setPageIndicator(new int[]{
                 R.drawable.banner_point_normal,
                 R.drawable.banner_point_select});
-        banner.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
+        turnBanner.setPageIndicatorAlign(TurnBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
     }
 
     public void pointerType1Right(View view) {
-        banner.setPointViewVisible(true);
-        banner.setPageIndicator();
-        banner.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
+        turnBanner.setPointViewVisible(true);
+        turnBanner.setPageIndicator(new int[]{
+                R.drawable.banner_point_normal,
+                R.drawable.banner_point_select});
+        turnBanner.setPageIndicatorAlign(TurnBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
     }
 
     public void pointerHide(View view) {
-        banner.setPointViewVisible(false);
+        turnBanner.setPointViewVisible(false);
     }
 
     public void startAutoTurn(View view) {
-        banner.startTurning(2000);
+        turnBanner.startTurn(2000);
     }
 
     public void pauseAutoTurn(View view) {
-        banner.pauseTurning();
+        turnBanner.pauseTurn();
     }
 
     public void stopAutoTurn(View view) {
-        banner.stopTurning();
+        turnBanner.stopTurn();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        banner.destroy();
+        turnBanner.destroy();
     }
 }

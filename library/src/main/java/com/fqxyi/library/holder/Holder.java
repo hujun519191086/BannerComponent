@@ -8,7 +8,7 @@ import android.view.View;
  */
 public interface Holder<T> {
 
-    View createView(Context context, boolean rightIndicator);
+    View createView(Context context);
 
     void updateUI(Context context, View view, int position, T data);
 

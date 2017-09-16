@@ -8,15 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <com.fqxyi.library.view.CBLoopViewPager
-            android:id="@+id/cbLoopViewPager"
+        <com.fqxyi.library.view.BannerViewPager
+            android:id="@+id/banner_view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
         <!-- 翻页指示点的viewgroup -->
 
         <LinearLayout
-            android:id="@+id/loPageTurningPoint"
+            android:id="@+id/banner_point_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

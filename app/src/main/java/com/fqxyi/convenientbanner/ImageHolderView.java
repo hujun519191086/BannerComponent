@@ -8,7 +8,6 @@ import com.facebook.drawee.drawable.ScalingUtils.ScaleType;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.fqxyi.library.holder.Holder;
-import com.fqxyi.library.util.DensityUtil;
 
 /**
  * 本地、网络图片加载
@@ -63,21 +62,17 @@ public class ImageHolderView implements Holder<String> {
      * 你可以通过layout文件来创建，也可以像我一样用代码创建，不一定是Image，任何控件都可以进行翻页
      */
     @Override
-    public View createView(Context context, boolean rightIndicator) {
-        if (rightIndicator) {
-            return View.inflate(context, R.layout.detail_right_indicator, null);
-        }else {
-            SimpleDraweeView imageView = new SimpleDraweeView(context);
-            LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, height);
-            imageView.setLayoutParams(params);
-            GenericDraweeHierarchy hierarchy = imageView.getHierarchy();
-            hierarchy.setActualImageScaleType(scaleType);
+    public View createView(Context context) {
+        SimpleDraweeView imageView = new SimpleDraweeView(context);
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, height);
+        imageView.setLayoutParams(params);
+        GenericDraweeHierarchy hierarchy = imageView.getHierarchy();
+        hierarchy.setActualImageScaleType(scaleType);
 
-            if (color != 0) {
-                imageView.setBackgroundColor(color);
-            }
-            return imageView;
+        if (color != 0) {
+            imageView.setBackgroundColor(color);
         }
+        return imageView;
     }
 
     @Override

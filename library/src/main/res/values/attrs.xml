@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="ConvenientBanner">
+    <declare-styleable name="TurnBanner">
         <attr name="canLoop" format="boolean" />
-        <attr name="cb_margin_left" format="dimension" />
-        <attr name="cb_margin_top" format="dimension" />
-        <attr name="cb_margin_right" format="dimension" />
-        <attr name="cb_margin_bottom" format="dimension" />
-        <attr name="cb_point_margin_left" format="dimension" />
-        <attr name="cb_point_margin_top" format="dimension" />
-        <attr name="cb_point_margin_right" format="dimension" />
-        <attr name="cb_point_margin_bottom" format="dimension" />
     </declare-styleable>
 </resources>
