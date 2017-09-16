@@ -8,6 +8,7 @@ import com.facebook.drawee.drawable.ScalingUtils.ScaleType;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.fqxyi.library.holder.Holder;
+import com.fqxyi.library.util.DensityUtil;
 
 /**
  * 本地、网络图片加载
