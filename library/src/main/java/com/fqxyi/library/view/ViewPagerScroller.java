@@ -1,4 +1,4 @@
-package com.fqxyi.library;
+package com.fqxyi.library.view;
 
 import android.content.Context;
 import android.widget.Scroller;

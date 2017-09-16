@@ -19,6 +19,7 @@ import com.fqxyi.library.holder.HolderCreator;
 import com.fqxyi.library.listener.OnItemClickListener;
 import com.fqxyi.library.listener.PageChangeListener;
 import com.fqxyi.library.view.BannerViewPager;
+import com.fqxyi.library.view.ViewPagerScroller;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -245,8 +246,20 @@ public class TurnBanner<T> extends LinearLayout {
 
     /**
      * 自定义指示器样式：. . . . .
+     *
+     * pointImgIds大小只能为2
      */
     public TurnBanner setPageIndicator(int[] pointImgIds) {
+        setPageIndicator(pointImgIds, 10, 10);
+        return this;
+    }
+
+    /**
+     * 自定义指示器样式：. . . . .
+     *
+     * pointImgIds大小只能为2
+     */
+    public TurnBanner setPageIndicator(int[] pointImgIds, int right, int bottom) {
         if (null == data) return this;
         // clear view
         pointerContainer.removeAllViews();
@@ -256,7 +269,7 @@ public class TurnBanner<T> extends LinearLayout {
         this.pointImgIds = pointImgIds;
         for (int count = 0; count < data.size(); count++) {
             ImageView pointView = new ImageView(getContext());
-            pointView.setPadding(5, 0, 5, 0);
+            pointView.setPadding(0, 0, 10, 10);
             if (pointViews.isEmpty()) {
                 pointView.setImageResource(pointImgIds[1]);
             } else {
