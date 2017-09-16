@@ -18,6 +18,7 @@ import com.fqxyi.library.adapter.BannerPageAdapter;
 import com.fqxyi.library.holder.HolderCreator;
 import com.fqxyi.library.listener.OnItemClickListener;
 import com.fqxyi.library.listener.PageChangeListener;
+import com.fqxyi.library.util.DensityUtil;
 import com.fqxyi.library.view.BannerViewPager;
 import com.fqxyi.library.view.ViewPagerScroller;
 
@@ -250,7 +251,7 @@ public class TurnBanner<T> extends LinearLayout {
      * pointImgIds大小只能为2
      */
     public TurnBanner setPageIndicator(int[] pointImgIds) {
-        setPageIndicator(pointImgIds, 10, 10);
+        setPageIndicator(pointImgIds, DensityUtil.dip2px(getContext(), 10), DensityUtil.dip2px(getContext(), 10));
         return this;
     }
 
