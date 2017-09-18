@@ -30,7 +30,7 @@ public class BannerPageAdapter<T> extends PagerAdapter {
     public int getCount() {
         int realCount = getRealCount();
         if (0 == realCount) return 0;
-        if (canLoop) return realCount * 300;
+        if (canLoop) return Integer.MAX_VALUE;
         return realCount;
     }
 
