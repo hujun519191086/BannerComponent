@@ -17,46 +17,31 @@ import com.fqxyi.library.util.DensityUtil;
 
 public class ImageHolderView implements Holder<String> {
 
-    private int height;
-    private int count;
-    private int color;
+    private int bannerHeight;
+    private int bannerBgColor;
 
     private ScaleType scaleType = ScaleType.FIT_CENTER;
 
-    private ImageCLickListener listener;
-
-    public interface ImageCLickListener {
+    // 点击事件
+    private ImageClickListener clickListener;
+    interface ImageClickListener {
         void click(View view, int position, String path);
     }
+    public void setClickListener(ImageClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
 
-    private ImageLongCLickListener longListener;
-
-    public interface ImageLongCLickListener {
+    // 长按事件
+    private ImageLongClickListener longListener;
+    interface ImageLongClickListener {
         void longClick(View view, int position, String path);
     }
-
-    public ImageHolderView(Context context, int height) {
-        this.height = DensityUtil.dip2px(context, height);
-    }
-
-    public void setCount(int count) {
-        this.count = count;
+    public void setLongClickListener(ImageLongClickListener longListener) {
+        this.longListener = longListener;
     }
 
     public ImageHolderView() {
-        this.height = LayoutParams.MATCH_PARENT;
-    }
-
-    public void setScaleType(ScaleType scaleType) {
-        this.scaleType = scaleType;
-    }
-
-    public void setListener(ImageCLickListener listener) {
-        this.listener = listener;
-    }
-
-    public void setLongListener(ImageLongCLickListener longListener) {
-        this.longListener = longListener;
+        this.bannerHeight = LayoutParams.MATCH_PARENT;
     }
 
     /**
@@ -65,13 +50,13 @@ public class ImageHolderView implements Holder<String> {
     @Override
     public View createView(Context context) {
         SimpleDraweeView imageView = new SimpleDraweeView(context);
-        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, height);
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, bannerHeight);
         imageView.setLayoutParams(params);
         GenericDraweeHierarchy hierarchy = imageView.getHierarchy();
         hierarchy.setActualImageScaleType(scaleType);
 
-        if (color != 0) {
-            imageView.setBackgroundColor(color);
+        if (bannerBgColor != 0) {
+            imageView.setBackgroundColor(bannerBgColor);
         }
         return imageView;
     }
@@ -84,8 +69,8 @@ public class ImageHolderView implements Holder<String> {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != listener) {
-                    listener.click(view, position, data);
+                if (null != clickListener) {
+                    clickListener.click(view, position, data);
                 }
             }
         });
@@ -100,7 +85,15 @@ public class ImageHolderView implements Holder<String> {
         });
     }
 
-    public void setBackground(int color) {
-        this.color = color;
+    public void setBannerHeight(Context context, int bannerHeight) {
+        this.bannerHeight = DensityUtil.dip2px(context, bannerHeight);
+    }
+
+    public void setScaleType(ScaleType scaleType) {
+        this.scaleType = scaleType;
+    }
+
+    public void setBannerBgColor(int color) {
+        this.bannerBgColor = color;
     }
 }
