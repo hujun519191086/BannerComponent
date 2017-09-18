@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         context = getApplicationContext();
 
         turnBanner = (TurnBanner) findViewById(R.id.banner);
+        // 设置数据
         turnBanner.setPages(new HolderCreator() {
             @Override
             public Object createHolder() {
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initEvent() {
+        // 开关 无限循环
         loopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        // 开关 banner滚动
         scrollBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 指示点类型1 居中展示
+     */
     public void pointerType1Center(View view) {
         turnBanner.setPointViewVisible(true);
         turnBanner.setPageIndicator(new int[]{
@@ -87,6 +93,9 @@ public class MainActivity extends AppCompatActivity {
         turnBanner.setPageIndicatorAlign(TurnBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
     }
 
+    /**
+     * 指示点类型自定义 居右展示
+     */
     public void pointerTypeCustomRight(View view) {
         turnBanner.setPointViewVisible(true);
         turnBanner.setPageIndicator(R.layout.point_layout, new PointChangeListener() {
@@ -99,18 +108,30 @@ public class MainActivity extends AppCompatActivity {
         turnBanner.setPageIndicatorAlign(TurnBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
     }
 
+    /**
+     * 指示点 隐藏
+     */
     public void pointerHide(View view) {
         turnBanner.setPointViewVisible(false);
     }
 
+    /**
+     * 开始自动轮播
+     */
     public void startAutoTurn(View view) {
         turnBanner.startTurn(2000);
     }
 
+    /**
+     * 暂停自动轮播
+     */
     public void pauseAutoTurn(View view) {
         turnBanner.pauseTurn();
     }
 
+    /**
+     * 停止自动轮播
+     */
     public void stopAutoTurn(View view) {
         turnBanner.stopTurn();
     }
@@ -119,6 +140,9 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * 防止内存泄漏
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
