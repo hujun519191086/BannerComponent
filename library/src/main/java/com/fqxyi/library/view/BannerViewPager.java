@@ -12,7 +12,7 @@ import com.fqxyi.library.listener.OnItemClickListener;
 public class BannerViewPager extends ViewPager {
 
     private BannerPageAdapter adapter;
-    private OnPageChangeListener outerPageChangeListener;
+    private OnPageChangeListener listener;
 
     private boolean isCanScroll = true; // 能否滑动视图
     private boolean canLoop = true; // 是否支持无限循环
@@ -38,22 +38,22 @@ public class BannerViewPager extends ViewPager {
                 int realPosition = adapter.getRealPosition(position);
                 if (previousPosition != realPosition) {
                     previousPosition = realPosition;
-                    if (outerPageChangeListener != null) {
-                        outerPageChangeListener.onPageSelected(realPosition);
+                    if (listener != null) {
+                        listener.onPageSelected(realPosition);
                     }
                 }
             }
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if (outerPageChangeListener != null) {
+                if (listener != null) {
                     if (position != adapter.getRealCount() - 1) {
-                        outerPageChangeListener.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                        listener.onPageScrolled(position, positionOffset, positionOffsetPixels);
                     } else {
                         if (positionOffset > .5) {
-                            outerPageChangeListener.onPageScrolled(0, 0, 0);
+                            listener.onPageScrolled(0, 0, 0);
                         } else {
-                            outerPageChangeListener.onPageScrolled(position, 0, 0);
+                            listener.onPageScrolled(position, 0, 0);
                         }
                     }
                 }
@@ -61,8 +61,8 @@ public class BannerViewPager extends ViewPager {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                if (outerPageChangeListener != null) {
-                    outerPageChangeListener.onPageScrollStateChanged(state);
+                if (listener != null) {
+                    listener.onPageScrollStateChanged(state);
                 }
             }
         });
@@ -70,7 +70,7 @@ public class BannerViewPager extends ViewPager {
 
     @Override
     public void setOnPageChangeListener(OnPageChangeListener listener) {
-        outerPageChangeListener = listener;
+        this.listener = listener;
     }
 
     public void setCanScroll(boolean isCanScroll) {

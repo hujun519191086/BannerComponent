@@ -18,7 +18,7 @@ import android.widget.RelativeLayout;
 import com.fqxyi.library.adapter.BannerPageAdapter;
 import com.fqxyi.library.holder.HolderCreator;
 import com.fqxyi.library.listener.OnItemClickListener;
-import com.fqxyi.library.listener.PageChangeListener;
+import com.fqxyi.library.listener.CustomPageChangeListener;
 import com.fqxyi.library.listener.PointChangeListener;
 import com.fqxyi.library.util.DensityUtil;
 import com.fqxyi.library.view.BannerViewPager;
@@ -45,7 +45,7 @@ public class TurnBanner<T> extends LinearLayout {
     // component
     private ViewPagerScroller scroller;
     private BannerPageAdapter<T> pageAdapter;
-    private PageChangeListener pageChangeListener;
+    private CustomPageChangeListener customPageChangeListener;
     private ViewPager.OnPageChangeListener onPageChangeListener;
     // data
     private List<T> data;
@@ -287,14 +287,13 @@ public class TurnBanner<T> extends LinearLayout {
             pointViews.add(pointView);
             pointerContainer.addView(pointView);
         }
-        if (null == pageChangeListener) {
-            pageChangeListener = new PageChangeListener(pointViews, pointImgIds);
+        if (null == customPageChangeListener) {
+            customPageChangeListener = new CustomPageChangeListener(pointViews, pointImgIds);
         } else {
-            pageChangeListener.setPointImgData(pointViews, pointImgIds);
+            customPageChangeListener.setPointImgData(pointViews, pointImgIds);
         }
-        bannerViewPager.setOnPageChangeListener(pageChangeListener);
-        pageChangeListener.onPageSelected(bannerViewPager.getRealItem());
-        if (null != onPageChangeListener) pageChangeListener.setPageChangeListener(onPageChangeListener);
+        bannerViewPager.setOnPageChangeListener(customPageChangeListener);
+        if (null != onPageChangeListener) customPageChangeListener.setPageChangeListener(onPageChangeListener);
         return this;
     }
 
@@ -313,14 +312,13 @@ public class TurnBanner<T> extends LinearLayout {
         View view = LayoutInflater.from(getContext()).inflate(layoutId, null);
         pointerContainer.addView(view);
         // other
-        if (null == pageChangeListener) {
-            pageChangeListener = new PageChangeListener(view, data.size(), pointChangeListener);
+        if (null == customPageChangeListener) {
+            customPageChangeListener = new CustomPageChangeListener(view, data.size(), pointChangeListener);
         } else {
-            pageChangeListener.setPointChangeListener(view, data.size(), pointChangeListener);
+            customPageChangeListener.setPointChangeListener(view, data.size(), pointChangeListener);
         }
-        bannerViewPager.setOnPageChangeListener(pageChangeListener);
-        pageChangeListener.onPageSelected(bannerViewPager.getRealItem());
-        if (null != onPageChangeListener) pageChangeListener.setPageChangeListener(onPageChangeListener);
+        bannerViewPager.setOnPageChangeListener(customPageChangeListener);
+        if (null != onPageChangeListener) customPageChangeListener.setPageChangeListener(onPageChangeListener);
         return this;
     }
 
@@ -367,8 +365,8 @@ public class TurnBanner<T> extends LinearLayout {
     public TurnBanner setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener) {
         this.onPageChangeListener = onPageChangeListener;
         // 如果有默认的监听器（即是使用了默认的翻页指示器）则把用户设置的依附到默认的上面，否则就直接设置
-        if (pageChangeListener != null) {
-            pageChangeListener.setPageChangeListener(onPageChangeListener);
+        if (customPageChangeListener != null) {
+            customPageChangeListener.setPageChangeListener(onPageChangeListener);
         } else {
             bannerViewPager.setOnPageChangeListener(onPageChangeListener);
         }

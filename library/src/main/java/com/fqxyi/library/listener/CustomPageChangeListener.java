@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 翻页指示器适配器
  */
-public class PageChangeListener implements ViewPager.OnPageChangeListener {
+public class CustomPageChangeListener implements ViewPager.OnPageChangeListener {
 
     // Image类型指示点view和id集合
     private List<ImageView> pointImgViews;
@@ -26,13 +26,13 @@ public class PageChangeListener implements ViewPager.OnPageChangeListener {
     }
 
     // 构造方法
-    public PageChangeListener(View pointView, int pointSize, PointChangeListener pointChangeListener) {
+    public CustomPageChangeListener(View pointView, int pointSize, PointChangeListener pointChangeListener) {
         this.pointView = pointView;
         this.pointSize = pointSize;
         this.pointChangeListener = pointChangeListener;
     }
 
-    public PageChangeListener(List<ImageView> pointImgViews, int pointImgIds[]) {
+    public CustomPageChangeListener(List<ImageView> pointImgViews, int pointImgIds[]) {
         this.pointImgViews = pointImgViews;
         this.pointImgIds = pointImgIds;
     }
