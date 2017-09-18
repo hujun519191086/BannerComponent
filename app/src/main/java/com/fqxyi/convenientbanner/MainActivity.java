@@ -1,16 +1,22 @@
 package com.fqxyi.convenientbanner;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fqxyi.library.TurnBanner;
 import com.fqxyi.library.holder.HolderCreator;
+import com.fqxyi.library.listener.PointChangeListener;
 
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Context context;
 
     private TurnBanner turnBanner;
 
@@ -29,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        context = getApplicationContext();
 
         turnBanner = (TurnBanner) findViewById(R.id.banner);
         turnBanner.setPages(new HolderCreator() {
@@ -71,15 +79,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void pointerType1Left(View view) {
-        turnBanner.setPointViewVisible(true);
-        turnBanner.setPageIndicator(new int[]{
-                R.drawable.banner_point_normal,
-                R.drawable.banner_point_select});
-        turnBanner.setPageIndicatorAlign(TurnBanner.PageIndicatorAlign.ALIGN_PARENT_LEFT);
-    }
-
-    public void pointerType2Center(View view) {
+    public void pointerType1Center(View view) {
         turnBanner.setPointViewVisible(true);
         turnBanner.setPageIndicator(new int[]{
                 R.drawable.banner_point_normal,
@@ -87,11 +87,15 @@ public class MainActivity extends AppCompatActivity {
         turnBanner.setPageIndicatorAlign(TurnBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
     }
 
-    public void pointerType1Right(View view) {
+    public void pointerTypeCustomRight(View view) {
         turnBanner.setPointViewVisible(true);
-        turnBanner.setPageIndicator(new int[]{
-                R.drawable.banner_point_normal,
-                R.drawable.banner_point_select});
+        turnBanner.setPageIndicator(R.layout.point_layout, new PointChangeListener() {
+            @Override
+            public void getInfo(View pointView, int position, int pointSize) {
+                TextView pointTxt = (TextView) pointView.findViewById(R.id.point_txt);
+                pointTxt.setText(position+1 + "/" + pointSize);
+            }
+        });
         turnBanner.setPageIndicatorAlign(TurnBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
     }
 
@@ -109,6 +113,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void stopAutoTurn(View view) {
         turnBanner.stopTurn();
+    }
+
+    private void toast(String msg) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override

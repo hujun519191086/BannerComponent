@@ -1,6 +1,7 @@
 package com.fqxyi.library.listener;
 
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.ImageView;
 
 import java.util.List;
@@ -13,6 +14,10 @@ public class PageChangeListener implements ViewPager.OnPageChangeListener {
     // Image类型指示点view和id集合
     private List<ImageView> pointImgViews;
     private int[] pointImgIds;
+    // 自定义类型的布局数据
+    private View pointView;
+    private int pointSize;
+    private PointChangeListener pointChangeListener;
 
     // 接口回调
     private ViewPager.OnPageChangeListener listener;
@@ -21,6 +26,12 @@ public class PageChangeListener implements ViewPager.OnPageChangeListener {
     }
 
     // 构造方法
+    public PageChangeListener(View pointView, int pointSize, PointChangeListener pointChangeListener) {
+        this.pointView = pointView;
+        this.pointSize = pointSize;
+        this.pointChangeListener = pointChangeListener;
+    }
+
     public PageChangeListener(List<ImageView> pointImgViews, int pointImgIds[]) {
         this.pointImgViews = pointImgViews;
         this.pointImgIds = pointImgIds;
@@ -39,6 +50,9 @@ public class PageChangeListener implements ViewPager.OnPageChangeListener {
     @Override
     public void onPageSelected(int index) {
         if (listener != null) listener.onPageSelected(index);
+        if (null != pointChangeListener) {
+            pointChangeListener.getInfo(pointView, index, pointSize);
+        }
         // 指示点切换
         if (null != pointImgViews && pointImgViews.size() > 0) {
             for (int i = 0; i < pointImgViews.size(); i++) {
@@ -55,4 +69,14 @@ public class PageChangeListener implements ViewPager.OnPageChangeListener {
         }
     }
 
+    public void setPointImgData(List<ImageView> pointImgViews, int pointImgIds[]) {
+        this.pointImgViews = pointImgViews;
+        this.pointImgIds = pointImgIds;
+    }
+
+    public void setPointChangeListener(View view, int size, PointChangeListener pointChangeListener) {
+        this.pointView = view;
+        this.pointSize = size;
+        this.pointChangeListener = pointChangeListener;
+    }
 }

@@ -19,8 +19,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="pointerType1Left"
-            android:text="指示点\n类型1靠左"
+            android:onClick="pointerType1Center"
+            android:text="指示点\n类型1居中"
             android:textColor="#000000"
             android:textSize="12sp"/>
 
@@ -28,17 +28,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="pointerType2Center"
-            android:text="指示点\n类型2居中"
-            android:textColor="#000000"
-            android:textSize="12sp"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="pointerType1Right"
-            android:text="指示点\n类型1靠右"
+            android:onClick="pointerTypeCustomRight"
+            android:text="指示点\n类型自定义靠右"
             android:textColor="#000000"
             android:textSize="12sp"/>
 

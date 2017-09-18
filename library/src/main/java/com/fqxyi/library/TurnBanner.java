@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.LayoutRes;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.fqxyi.library.adapter.BannerPageAdapter;
 import com.fqxyi.library.holder.HolderCreator;
 import com.fqxyi.library.listener.OnItemClickListener;
 import com.fqxyi.library.listener.PageChangeListener;
+import com.fqxyi.library.listener.PointChangeListener;
 import com.fqxyi.library.util.DensityUtil;
 import com.fqxyi.library.view.BannerViewPager;
 import com.fqxyi.library.view.ViewPagerScroller;
@@ -251,6 +253,9 @@ public class TurnBanner<T> extends LinearLayout {
      * pointImgIds大小只能为2
      */
     public TurnBanner setPageIndicator(int[] pointImgIds) {
+        if (null == pointImgIds || pointImgIds.length != 2) {
+            throw new RuntimeException("pointImgIds大小只能为2");
+        }
         setPageIndicator(pointImgIds, DensityUtil.dip2px(getContext(), 10), DensityUtil.dip2px(getContext(), 10));
         return this;
     }
@@ -261,6 +266,9 @@ public class TurnBanner<T> extends LinearLayout {
      * pointImgIds大小只能为2
      */
     public TurnBanner setPageIndicator(int[] pointImgIds, int right, int bottom) {
+        if (null == pointImgIds || pointImgIds.length != 2) {
+            throw new RuntimeException("pointImgIds大小只能为2");
+        }
         if (null == data) return this;
         // clear view
         pointerContainer.removeAllViews();
@@ -279,7 +287,37 @@ public class TurnBanner<T> extends LinearLayout {
             pointViews.add(pointView);
             pointerContainer.addView(pointView);
         }
-        pageChangeListener = new PageChangeListener(pointViews, pointImgIds);
+        if (null == pageChangeListener) {
+            pageChangeListener = new PageChangeListener(pointViews, pointImgIds);
+        } else {
+            pageChangeListener.setPointImgData(pointViews, pointImgIds);
+        }
+        bannerViewPager.setOnPageChangeListener(pageChangeListener);
+        pageChangeListener.onPageSelected(bannerViewPager.getRealItem());
+        if (null != onPageChangeListener) pageChangeListener.setPageChangeListener(onPageChangeListener);
+        return this;
+    }
+
+    /**
+     * 完全自定义的指示点布局
+     * @param layoutId 外部传入的指示点布局
+     */
+    public TurnBanner setPageIndicator(@LayoutRes int layoutId, PointChangeListener pointChangeListener) {
+        if (null == data || null == pointChangeListener) return this;
+        // clear view
+        pointerContainer.removeAllViews();
+        // clear data
+        pointViews.clear();
+        pointImgIds = null;
+        // add view
+        View view = LayoutInflater.from(getContext()).inflate(layoutId, null);
+        pointerContainer.addView(view);
+        // other
+        if (null == pageChangeListener) {
+            pageChangeListener = new PageChangeListener(view, data.size(), pointChangeListener);
+        } else {
+            pageChangeListener.setPointChangeListener(view, data.size(), pointChangeListener);
+        }
         bannerViewPager.setOnPageChangeListener(pageChangeListener);
         pageChangeListener.onPageSelected(bannerViewPager.getRealItem());
         if (null != onPageChangeListener) pageChangeListener.setPageChangeListener(onPageChangeListener);
