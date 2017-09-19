@@ -1,4 +1,4 @@
-package com.fqxyi.convenientbanner;
+package com.fqxyi.turnbanner;
 
 import android.content.Context;
 import android.os.Bundle;
