@@ -1,6 +1,6 @@
 # ConvenientBanner
 
-主要源码来自于https://github.com/saiwu-bigkoo/Android-ConvenientBanner
+目的：优化和扩展，来源：https://github.com/saiwu-bigkoo/Android-ConvenientBanner
 
 # 效果演示
 
