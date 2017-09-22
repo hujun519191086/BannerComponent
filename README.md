@@ -8,4 +8,4 @@
 
 # Simple类
 
-[MainActivity.java](https://github.com/fengqingxiuyi/TurnBanner/blob/master/app/src/main/java/com/fqxyi/convenientbanner/MainActivity.java)
+[MainActivity.java](https://github.com/fengqingxiuyi/TurnBanner/blob/master/app/src/main/java/com/fqxyi/turnbanner/MainActivity.java)
