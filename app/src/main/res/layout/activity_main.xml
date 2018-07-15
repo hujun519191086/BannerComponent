@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.fqxyi.turnbanner.MainActivity">
+    tools:context="com.fqxyi.bannercomponent.MainActivity">
 
-    <com.fqxyi.library.TurnBanner
+    <com.fqxyi.banner.TurnBanner
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="200dp"/>

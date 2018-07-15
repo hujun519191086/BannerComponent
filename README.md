@@ -1,6 +1,6 @@
 # TurnBanner
 
-目的：优化和扩展，来源：https://github.com/saiwu-bigkoo/Android-ConvenientBanner
+banner组件 目的：优化和扩展，来源：https://github.com/saiwu-bigkoo/Android-ConvenientBanner
 
 # 效果演示
 
